@@ -1,0 +1,1 @@
+INSERT INTO AUTHOR VALUES (185, 'Benson', 'Reeves', 1990);

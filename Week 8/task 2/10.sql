@@ -1,0 +1,7 @@
+UPDATE EMP_2
+SET EMP_PCT = 5
+WHERE EMP_NUM IN (
+	101,
+    105,
+    107
+);
