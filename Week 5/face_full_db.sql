@@ -1,0 +1,168 @@
+-- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: mydb
+-- ------------------------------------------------------
+-- Server version	8.0.23
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `author`
+--
+
+DROP TABLE IF EXISTS `author`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `author` (
+  `AUTHOR_ID` decimal(7,0) NOT NULL,
+  `AUTHOR_FNAME` varchar(20) DEFAULT NULL,
+  `AUTHOR_LNAME` varchar(20) DEFAULT NULL,
+  `AUTHOR_BIRTHYEAR` decimal(4,0) DEFAULT NULL,
+  PRIMARY KEY (`AUTHOR_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `author`
+--
+
+LOCK TABLES `author` WRITE;
+/*!40000 ALTER TABLE `author` DISABLE KEYS */;
+INSERT INTO `author` VALUES (185,'Benson','Reeves',1990),(218,'Rachel','Beatney',1983),(229,'Carmine','Salvadore',NULL),(251,'Hugo','Bruer',1972),(262,'Xia','Chiang',NULL),(273,'Reba','Durante',1969),(284,'Trina','Tankersly',1961),(383,'Neal','Walsh',1980),(394,'Robert','Lake',1982),(438,'Perry','Pearson',1986),(460,'Connie','Paulsen',1983),(559,'Rachel','McGill',NULL),(581,'Manish','Aggerwal',1984),(592,'Lawrence','Sheel',1976),(603,'Julia','Palca',1988);
+/*!40000 ALTER TABLE `author` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `book`
+--
+
+DROP TABLE IF EXISTS `book`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `book` (
+  `BOOK_NUM` decimal(10,0) NOT NULL,
+  `BOOK_TITLE` varchar(120) DEFAULT NULL,
+  `BOOK_YEAR` decimal(4,0) DEFAULT NULL,
+  `BOOK_COST` decimal(8,2) DEFAULT NULL,
+  `BOOK_SUBJECT` varchar(120) DEFAULT NULL,
+  `PATRON_ID` decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (`BOOK_NUM`),
+  KEY `fk_BOOK_PATRON1_idx` (`PATRON_ID`),
+  CONSTRAINT `fk_BOOK_PATRON1` FOREIGN KEY (`PATRON_ID`) REFERENCES `patron` (`PATRON_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `book`
+--
+
+LOCK TABLES `book` WRITE;
+/*!40000 ALTER TABLE `book` DISABLE KEYS */;
+INSERT INTO `book` VALUES (5235,'Beginner\'s Guide to JAVA',2014,59.95,'Programming',NULL),(5236,'Database in the Cloud',2014,79.95,'Cloud',NULL),(5237,'Mastering the database environment',2015,89.95,'Database',NULL),(5238,'Conceptual Programming',2015,59.95,'Programming',1229),(5239,'J++ in Mobile Apps',2015,49.95,'Programming',NULL),(5240,'iOS Programming',2015,79.95,'Programming',1212),(5241,'JAVA First Steps',2015,49.95,'Programming',NULL),(5242,'C# in Middleware Deployment',2015,59.95,'Middleware',1228),(5243,'DATABASES in Theory',2015,129.95,'Database',NULL),(5244,'Cloud-based Mobile Applications',2015,69.95,'Cloud',NULL),(5245,'The Golden Road to Platform independence',2016,119.95,'Middleware',NULL),(5246,'Capture the Cloud',2016,69.95,'Cloud',1172),(5247,'Shining Through the Cloud: Sun Programming',2016,109.95,'Programming',NULL),(5248,'What You Always Wanted to Know About Database, But Were Afraid to Ask',2016,49.95,'Database',NULL),(5249,'Starlight Applications',2016,69.95,'Cloud',1207),(5250,'Reengineering the Middle Tier',2016,89.95,'Middleware',NULL),(5251,'Thoughts on Revitalizing Ruby',2016,59.95,'Programming',NULL),(5252,'Beyond the Database Veil',2016,69.95,'Database',1229),(5253,'Virtual Programming for Virtual Environments',2016,79.95,'Programming',NULL),(5254,'Coding Style for Maintenance',2017,49.95,'Programming',NULL);
+/*!40000 ALTER TABLE `book` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `checkout`
+--
+
+DROP TABLE IF EXISTS `checkout`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `checkout` (
+  `CHECKOUT_NUM` decimal(15,0) NOT NULL,
+  `BOOK_NUM` decimal(10,0) NOT NULL,
+  `PATRON_ID` decimal(10,0) NOT NULL,
+  `CHECK_OUT_DATE` date DEFAULT NULL,
+  `CHECK_DUE_DATE` date DEFAULT NULL,
+  `CHECK_IN_DATE` date DEFAULT NULL,
+  PRIMARY KEY (`CHECKOUT_NUM`),
+  KEY `fk_CHECKOUT_PATRON_idx` (`PATRON_ID`),
+  KEY `fk_CHECKOUT_BOOK1_idx` (`BOOK_NUM`),
+  CONSTRAINT `fk_CHECKOUT_BOOK1` FOREIGN KEY (`BOOK_NUM`) REFERENCES `book` (`BOOK_NUM`),
+  CONSTRAINT `fk_CHECKOUT_PATRON` FOREIGN KEY (`PATRON_ID`) REFERENCES `patron` (`PATRON_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `checkout`
+--
+
+LOCK TABLES `checkout` WRITE;
+/*!40000 ALTER TABLE `checkout` DISABLE KEYS */;
+INSERT INTO `checkout` VALUES (91001,5235,1165,'2017-03-31','2017-04-14','2017-04-09'),(91002,5238,1209,'2017-03-31','2017-04-07','2017-04-05'),(91003,5240,1160,'2017-03-31','2017-04-14','2017-04-09'),(91004,5237,1160,'2017-03-31','2017-04-14','2017-04-03'),(91005,5236,1202,'2017-03-31','2017-04-07','2017-04-08'),(91006,5235,1203,'2017-04-05','2017-04-12','2017-04-13'),(91007,5244,1174,'2017-04-05','2017-04-12','2017-04-08'),(91008,5248,1181,'2017-04-05','2017-04-12','2017-04-06'),(91009,5242,1170,'2017-04-05','2017-04-19','2017-04-09'),(91010,5235,1161,'2017-04-05','2017-04-19','2017-04-05'),(91011,5236,1181,'2017-04-05','2017-04-12','2017-04-11'),(91012,5249,1181,'2017-04-08','2017-04-15','2017-04-12'),(91013,5240,1160,'2017-04-10','2017-04-24','2017-04-19'),(91014,5236,1204,'2017-04-11','2017-04-18','2017-04-19'),(91015,5237,1204,'2017-04-11','2017-04-18','2017-04-13'),(91016,5236,1183,'2017-04-13','2017-04-27','2017-04-14'),(91017,5240,1184,'2017-04-14','2017-04-21','2017-04-22'),(91018,5236,1170,'2017-04-14','2017-04-28','2017-04-14'),(91019,5246,1171,'2017-04-14','2017-04-21','2017-04-17'),(91020,5254,1185,'2017-04-16','2017-04-23','2017-04-23'),(91021,5238,1185,'2017-04-16','2017-04-23','2017-04-21'),(91022,5252,1171,'2017-04-16','2017-04-23','2017-04-19'),(91023,5249,1207,'2017-04-16','2017-04-23','2017-04-19'),(91024,5235,1209,'2017-04-21','2017-04-28','2017-04-29'),(91025,5246,1172,'2017-04-21','2017-04-28','2017-04-27'),(91026,5254,1161,'2017-04-21','2017-05-04','2017-04-26'),(91027,5243,1161,'2017-04-21','2017-05-04','2017-04-26'),(91028,5236,1183,'2017-04-22','2017-05-05','2017-04-30'),(91029,5244,1203,'2017-04-22','2017-04-29','2017-04-26'),(91030,5242,1207,'2017-04-22','2017-04-29','2017-04-30'),(91031,5252,1165,'2017-04-23','2017-05-06','2017-04-30'),(91032,5238,1172,'2017-04-23','2017-04-30','2017-04-26'),(91033,5235,1174,'2017-04-23','2017-04-30','2017-04-23'),(91034,5240,1185,'2017-04-23','2017-04-30','2017-05-01'),(91035,5248,1165,'2017-04-24','2017-05-07','2017-04-25'),(91036,5237,1202,'2017-04-24','2017-04-30','2017-04-28'),(91037,5235,1210,'2017-04-28','2017-05-04','2017-05-01'),(91038,5238,1215,'2017-04-28','2017-05-04','2017-04-30'),(91039,5240,1222,'2017-04-28','2017-05-04','2017-05-06'),(91040,5237,1228,'2017-04-28','2017-05-04','2017-05-05'),(91041,5236,1211,'2017-04-28','2017-05-04','2017-04-30'),(91042,5235,1220,'2017-04-29','2017-05-05','2017-05-05'),(91043,5244,1226,'2017-04-29','2017-05-05','2017-05-07'),(91044,5248,1219,'2017-04-30','2017-05-07','2017-05-08'),(91045,5242,1210,'2017-04-30','2017-05-07','2017-05-04'),(91046,5235,1225,'2017-04-30','2017-05-07','2017-05-03'),(91047,5236,1218,'2017-04-30','2017-05-07','2017-05-07'),(91048,5249,1229,'2017-05-04','2017-05-11','2017-05-06'),(91049,5240,1214,'2017-05-04','2017-05-11','2017-05-04'),(91050,5236,1220,'2017-05-08','2017-05-15','2017-05-13'),(91051,5237,1222,'2017-05-08','2017-05-15','2017-05-15'),(91052,5236,1213,'2017-05-08','2017-05-15','2017-05-08'),(91053,5240,1212,'2017-05-09','2017-05-16',NULL),(91054,5236,1221,'2017-05-09','2017-05-16','2017-05-11'),(91055,5246,1221,'2017-05-09','2017-05-16','2017-05-10'),(91056,5254,1224,'2017-05-10','2017-05-17','2017-05-15'),(91057,5238,1224,'2017-05-10','2017-05-17','2017-05-11'),(91058,5252,1171,'2017-05-10','2017-05-17','2017-05-15'),(91059,5249,1207,'2017-05-10','2017-05-17',NULL),(91060,5235,1209,'2017-05-15','2017-05-22','2017-05-18'),(91061,5246,1172,'2017-05-15','2017-05-22',NULL),(91062,5254,1223,'2017-05-15','2017-05-22','2017-05-16'),(91063,5243,1223,'2017-05-15','2017-05-22','2017-05-20'),(91064,5236,1183,'2017-05-17','2017-05-31','2017-05-21'),(91065,5244,1210,'2017-05-17','2017-05-24','2017-05-17'),(91066,5242,1228,'2017-05-19','2017-05-26',NULL),(91067,5252,1229,'2017-05-24','2017-05-31',NULL),(91068,5238,1229,'2017-05-24','2017-05-31',NULL);
+/*!40000 ALTER TABLE `checkout` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `patron`
+--
+
+DROP TABLE IF EXISTS `patron`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `patron` (
+  `PATRON_ID` decimal(10,0) NOT NULL,
+  `PATRON_FNAME` varchar(20) DEFAULT NULL,
+  `PATRON_LNAME` varchar(20) DEFAULT NULL,
+  `PATRON_TYPE` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`PATRON_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `patron`
+--
+
+LOCK TABLES `patron` WRITE;
+/*!40000 ALTER TABLE `patron` DISABLE KEYS */;
+INSERT INTO `patron` VALUES (1160,'robert','carter','Faculty'),(1161,'Kelsey','Koch','Faculty'),(1165,'Cedric','Baldwin','Faculty'),(1166,'Vera','Alvarado','Student'),(1167,'Alan','Martin','FACULTY'),(1170,'Cory','Barry','faculty'),(1171,'Peggy','Marsh','STUDENT'),(1172,'Tony','Miles','STUDENT'),(1174,'Betsy','Malone','STUDENT'),(1180,'Nadine','Blair','STUDENT'),(1181,'Allen','Horne','Student'),(1182,'Jamal','Melendez','STUDENT'),(1183,'Helena','Hughes','Faculty'),(1184,'Jimmie','Love','StudenT'),(1185,'Sandra','Yang','student'),(1200,'Lorenzo','Torres','Student'),(1201,'Shelby','Noble','Student'),(1202,'Holly','Anthony','Student'),(1203,'Tyler','Pope','STUDENT'),(1204,'Thomas','Duran','Student'),(1205,'Claire','Gomez','student'),(1207,'Iva','Ramos','Student'),(1208,'Ollie','Cantrell','Student'),(1209,'Rena','Mathis','Student'),(1210,'Keith','Cooley','STUdent'),(1211,'Jerald','Gaines','Student'),(1212,'Iva','McClain','Student'),(1213,'Desiree','Rivas','Student'),(1214,'Marina','King','Student'),(1215,'Maureen','Downs','Student'),(1218,'Angel','Terrell','Student'),(1219,'Desiree','Harrington','Student'),(1220,'Carlton','Morton','Student'),(1221,'Gloria','Pitts','Student'),(1222,'Zach','Kelly','Student'),(1223,'Jose','Hays','Student'),(1224,'Jewel','England','Student'),(1225,'Wilfred','Fuller','Student'),(1226,'Jeff','Owens','Student'),(1227,'Alicia','Dickson','Student'),(1228,'Homer','Goodman','Student'),(1229,'Gerald','Burke','Student'),(1237,'Brandi','Larson','Student'),(1238,'Erika','Bowen','Student'),(1239,'Elton','Irwin','Student'),(1240,'Jan','Joyce','Student'),(1241,'Irene','West','Student'),(1242,'Mario','King','Student'),(1243,'Roberto','Kennedy','Student'),(1244,'Leon','Richmond','Student');
+/*!40000 ALTER TABLE `patron` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `writes`
+--
+
+DROP TABLE IF EXISTS `writes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `writes` (
+  `BOOK_NUM` decimal(10,0) NOT NULL,
+  `AUTHOR_ID` decimal(7,0) NOT NULL,
+  PRIMARY KEY (`BOOK_NUM`,`AUTHOR_ID`),
+  KEY `fk_WRITES_AUTHOR1_idx` (`AUTHOR_ID`),
+  CONSTRAINT `fk_WRITES_AUTHOR1` FOREIGN KEY (`AUTHOR_ID`) REFERENCES `author` (`AUTHOR_ID`),
+  CONSTRAINT `fk_WRITES_BOOK1` FOREIGN KEY (`BOOK_NUM`) REFERENCES `book` (`BOOK_NUM`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `writes`
+--
+
+LOCK TABLES `writes` WRITE;
+/*!40000 ALTER TABLE `writes` DISABLE KEYS */;
+INSERT INTO `writes` VALUES (5237,185),(5253,185),(5240,218),(5239,229),(5248,229),(5243,251),(5246,251),(5244,262),(5249,262),(5252,262),(5235,273),(5244,284),(5236,383),(5250,383),(5245,394),(5247,394),(5250,438),(5239,460),(5241,460),(5251,460),(5241,559),(5254,559),(5242,581),(5239,592),(5238,603);
+/*!40000 ALTER TABLE `writes` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2021-03-24 18:22:27

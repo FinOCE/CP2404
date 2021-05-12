@@ -1,0 +1,15 @@
+INSERT INTO `mydb`.`author` VALUES (185, "Benson", "Reeves", 1990);
+INSERT INTO `mydb`.`author` VALUES (218, "Rachel", "Beatney", 1983);
+INSERT INTO `mydb`.`author` VALUES (229, "Carmine", "Salvadore", NULL);
+INSERT INTO `mydb`.`author` VALUES (251, "Hugo", "Bruer", 1972);
+INSERT INTO `mydb`.`author` VALUES (262, "Xia", "Chiang", NULL);
+INSERT INTO `mydb`.`author` VALUES (273, "Reba", "Durante", 1969);
+INSERT INTO `mydb`.`author` VALUES (284, "Trina", "Tankersly", 1961);
+INSERT INTO `mydb`.`author` VALUES (383, "Neal", "Walsh", 1980);
+INSERT INTO `mydb`.`author` VALUES (394, "Robert", "Lake", 1982);
+INSERT INTO `mydb`.`author` VALUES (438, "Perry", "Pearson", 1986);
+INSERT INTO `mydb`.`author` VALUES (460, "Connie", "Paulsen", 1983);
+INSERT INTO `mydb`.`author` VALUES (559, "Rachel", "McGill", NULL);
+INSERT INTO `mydb`.`author` VALUES (581, "Manish", "Aggerwal", 1984);
+INSERT INTO `mydb`.`author` VALUES (592, "Lawrence", "Sheel", 1976);
+INSERT INTO `mydb`.`author` VALUES (603, "Julia", "Palca", 1988);
