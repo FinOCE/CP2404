@@ -1,0 +1,3 @@
+SELECT
+    COUNT(BOOK_NUM) AS 'Number of Books'
+FROM BOOK;

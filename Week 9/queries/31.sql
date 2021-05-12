@@ -1,0 +1,3 @@
+SELECT
+    SUM(BOOK_COST) AS 'Library Value'
+FROM BOOK;

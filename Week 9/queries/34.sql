@@ -1,0 +1,8 @@
+SELECT
+    AU_ID,
+    COUNT(*) AS 'Books Written'
+FROM WRITES
+GROUP BY AU_ID
+ORDER BY
+    COUNT(*) DESC,
+    AU_ID;

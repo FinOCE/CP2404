@@ -1,0 +1,3 @@
+SELECT
+    COUNT(DISTINCT BOOK_SUBJECT) AS 'Number of Subjects'
+FROM BOOK;

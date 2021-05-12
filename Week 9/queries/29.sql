@@ -1,0 +1,3 @@
+SELECT
+    MAX(BOOK_COST) AS 'Most Expensive'
+FROM BOOK;

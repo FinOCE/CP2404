@@ -1,0 +1,3 @@
+SELECT
+    MIN(BOOK_COST) AS 'Least Expensive'
+FROM BOOK;

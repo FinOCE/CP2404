@@ -1,0 +1,6 @@
+SELECT
+    BOOK_NUM,
+    BOOK_TITLE,
+    BOOK_COST AS 'Replacement Cost'
+FROM BOOK
+ORDER BY BOOK_NUM;

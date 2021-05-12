@@ -1,0 +1,15 @@
+SELECT
+    AUTHOR.AU_ID,
+    AU_LNAME,
+    BOOK_TITLE,
+    CHECK_OUT_DATE,
+    PAT_LNAME
+FROM CHECKOUT
+JOIN BOOK ON BOOK.BOOK_NUM = CHECKOUT.BOOK_NUM
+JOIN WRITES ON WRITES.BOOK_NUM = BOOK.BOOK_NUM
+JOIN AUTHOR ON AUTHOR.AU_ID = WRITES.AU_ID
+JOIN PATRON ON PATRON.PAT_ID = BOOK.PAT_ID
+WHERE AU_LNAME = 'Bruer'
+AND PAT_LNAME = 'Miles'
+ORDER BY CHECK_OUT_DATE;
+-- My result has 4 rows whereas the provided only has 2. I don't see why this is the case because it seems correct still
